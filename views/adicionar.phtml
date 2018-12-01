@@ -1,0 +1,246 @@
+<?php header("Access-Control-Allow-Origin: *"); ?>
+
+<!-- Preloader Start -->
+<div id="preloader">
+    <div class="colorlib-load"></div>
+</div>
+
+<!-- ***** Header Area Start ***** -->
+<header class="header_area animated">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Menu Area Start -->
+            <div class="col-12 col-lg-10">
+                <div class="menu_area">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <!-- Logo -->
+                        <a class="navbar-brand" href="#">T.A.T.</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar"
+                            aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <!-- Menu Area -->
+                        <div class="collapse navbar-collapse" id="ca-navbar">
+                            <ul class="navbar-nav ml-auto" id="nav">
+
+                            </ul>
+                            <div class="sing-up-button d-lg-none">
+                                <a href="home">Home</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Signup btn -->
+            <div class="col-12 col-lg-2">
+                <div class="sing-up-button d-none d-lg-block">
+                    <a href="home">Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Wellcome Area Start ***** -->
+<section class="wellcome_area clearfix" id="cadastro">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 col-md">
+                <div class="wellcome-heading">
+                    <h2>Cadastrar um Relato</h2>
+                    <h3>Blue</h3>
+                    <p>Seus dados estão protegidos e são secretos!</p>
+                </div>
+                <div class="get-start-area">
+                    <!-- Form Start -->
+                    <div class="col-12 col-lg-2">
+                        <div class="sing-up-button d-none d-lg-block">
+                            <a href="#relatos">Começar</a>
+                        </div>
+                    </div>
+                    <!-- Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Wellcome Area End ***** -->
+
+<!-- ***** Relatos Area Start ***** -->
+<section class="special-area bg-white section_padding_100" id="relatos">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading Area -->
+                <div class="section-heading text-center">
+                    <h2>Relatos</h2>
+                    <p>Selecione no mapa o local onde ocorreu</p>
+                    <div class="line-shape"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!-- Single Special Area -->
+
+
+            <div id='myMap' style='width: auto; height: 500px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'></div>
+    
+    
+            <script type='text/javascript'>
+                function loadMapScenario() {
+                    var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                        mapTypeId: Microsoft.Maps.MapTypeId.grayscale, zoom:3,
+                        supportedMapTypes: [Microsoft.Maps.MapTypeId.road, Microsoft.Maps.MapTypeId.aerial, Microsoft.Maps.MapTypeId.grayscale]
+                    });
+                    // Binding the events
+                    Microsoft.Maps.Events.addHandler(map, 'click', function (e) { handleArgs(e.getX(), e.getY(), e); });
+
+                    // Setting up the printout panel
+
+                    var highlights = {};
+                    function handleArgs(x, y, e) {
+                        var point = new Microsoft.Maps.Point(x, y);
+                        var loc = e.target.tryPixelToLocation(point);
+                        console.log(loc['latitude']);
+                        $('#latitude').val(loc['latitude']);
+                        $('#longitude').val(loc['longitude']);
+
+                        console.log(loc['longitude']);
+                        // // // console.log("http://teste.testando.com.br/da.js?pagina=home&inst="+loc+"&newcustomer='+newcostumer+'&id=123");
+
+                        dataPost = {"lat": loc['latitude'], "lon": loc['longitude']};
+                        
+                        $.ajax({
+                            type: "POST",
+                            url: "busca-coordenadas",
+                            data: dataPost
+                        }).success(function(retorno){
+                            data = retorno.split("<");
+                            
+                            parseJson = JSON.parse(data[0]);
+                            
+                            cidade = parseJson['resourceSets']['0']['resources']['0']['address']['locality'];
+                            pais = parseJson['resourceSets']['0']['resources']['0']['address']['countryRegion'];
+                            estado = parseJson['resourceSets']['0']['resources']['0']['address']['adminDistrict'];
+                            $('#cidade').val(cidade);
+                            $('#estado').val(estado);
+                            $('#pais').val(pais);
+                        }).fail(function(retorno){
+                            alert("erro ajax");
+                        });
+
+                        var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                        map.entities.push(pushpin);
+                    }
+
+                }
+            </script>
+            <br>
+            <div class="contact_from">
+                <br>
+                <form action="cadastrar-relato" method="post">
+                    <!-- Message Input Area Start -->
+                    <div class="contact_input_area">
+                        <div class="row">
+                            <!-- Single Input Area Start -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="finalidade" id="finalidade" placeholder="Finalidade do tráfico"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="envolvidos" id="envolvidos" placeholder="Quantidade de envolvidos"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="relato" id="relato" placeholder="Relate aqui  que aconteceu"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="data" id="data" placeholder="Data do acontecimento Ex 01/01/20018"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="faixa" id="faixa"
+                                        required>
+                                        <option value="0" disabled selected>Escolha a faixa etária do aliciado</option>
+                                        <option value="-14">-14</option>
+                                        <option value="14-18">14-18</option>
+                                        <option value="18-21">18-21</option>
+                                        <option value="21-25">21-25</option>
+                                        <option value="25-30">25-30</option>
+                                        <option value="+30">+30</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="pais" id="pais" placeholder="Pais"
+                                        required readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="estado" id="estado" placeholder="Estado"
+                                        required readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade"
+                                        required readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude"
+                                        required readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude"
+                                        required readonly="readonly">
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Single Input Area Start -->
+                            <div class="col-12">
+                                <button type="submit" class="btn submit-btn">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Message Input Area End -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ***** Relatos Area End ***** -->
+<br>
+
+<!-- ***** Footer Area Start ***** -->
+<footer class="footer-social-icon text-center section_padding_70 clearfix">
+    <!-- footer logo -->
+    <div class="footer-text">
+        <h2>T.A.T.</h2>
+    </div>
+    <!-- social icon-->
+    <div class="footer-social-icon">
+        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="#"><i class="active fa fa-twitter" aria-hidden="true"></i></a>
+        <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+    </div>
+</footer>
+<!-- ***** Footer Area Start ***** -->

@@ -1,0 +1,289 @@
+<!-- Preloader Start -->
+<div id="preloader">
+    <div class="colorlib-load"></div>
+</div>
+
+<!-- ***** Header Area Start ***** -->
+<header class="header_area animated">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Menu Area Start -->
+            <div class="col-12 col-lg-10">
+                <div class="menu_area">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <!-- Logo -->
+                        <a class="navbar-brand" href="#">T.A.T.</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar"
+                            aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <!-- Menu Area -->
+                        <div class="collapse navbar-collapse" id="ca-navbar">
+                            <ul class="navbar-nav ml-auto" id="nav">
+                                <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#relatos">Relatos</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
+                            </ul>
+                            <div class="sing-up-button d-lg-none">
+                                <a href="login">Acessar</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Signup btn -->
+            <div class="col-12 col-lg-2">
+                <div class="sing-up-button d-none d-lg-block">
+                    <a href="login">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Wellcome Area Start ***** -->
+<section class="wellcome_area clearfix" id="home">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 col-md">
+                <div class="wellcome-heading">
+                    <h2>Together Against Trafficking</h2>
+                    <h3>Blue</h3>
+                    <p>Salvando pessoas ao redor do mundo!</p>
+                </div>
+                <div class="get-start-area">
+                    <!-- Form Start -->
+                    <div class="col-12 col-lg-2">
+                        <div class="sing-up-button d-none d-lg-block">
+                            <a href="#about">Começar</a>
+                        </div>
+                    </div>
+                    <!-- Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Wellcome Area End ***** -->
+
+<!-- ***** Special Area Start ***** -->
+<section class="special-area bg-white section_padding_100" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading Area -->
+                <div class="section-heading text-center">
+                    <h2>Sobre nós</h2>
+                    <div class="line-shape"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Special Area -->
+            <div class="col-12 col-md-4">
+                <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="single-icon">
+                        <i class="ti-user" aria-hidden="true"></i>
+                    </div>
+                    <h4>O que somos</h4>
+                    <p>Uma paltaforma que auxilia na denuncia de tráfico de pessoas e que ajuda na fiscalização</p>
+                </div>
+            </div>
+            <!-- Single Special Area -->
+            <div class="col-12 col-md-4">
+                <div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="single-icon">
+                        <i class="ti-help" aria-hidden="true"></i>
+                    </div>
+                    <h4>Como usar</h4>
+                    <p>Para utilizar nossa plataforma basta você criar uma conta e adicionar ou pesquisar relatos sobre
+                        tráfico de pessoas</p>
+                </div>
+            </div>
+            <!-- Single Special Area -->
+            <div class="col-12 col-md-4">
+                <div class="single-special text-center wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="single-icon">
+                        <i class="ti-comments" aria-hidden="true"></i>
+                    </div>
+                    <h4>Chat</h4>
+                    <p>Temos um chat disponível para para auxiliar nos passos que você deve tomar quando passar por
+                        tráfico de pessoas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Relatos Area -->
+    <section id="relatos">
+        <div class="special_description_area mt-150">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="special_description_img">
+                            <!-- Local do mapa -->
+
+                            <div id='myMap' style='width: auto; height: 500px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'></div>
+
+
+                            <script type='text/javascript'>
+                                function loadMapScenario() {
+                                    var navigationBarMode = Microsoft.Maps.NavigationBarMode;
+                                    var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                                        navigationBarMode: navigationBarMode.compact,mapTypeId: Microsoft.Maps.MapTypeId.grayscale,zoom:2,
+                                        supportedMapTypes: [Microsoft.Maps.MapTypeId.road, Microsoft.Maps.MapTypeId.aerial, Microsoft.Maps.MapTypeId.grayscale]
+                                    });
+                                    // Binding the events
+                                    Microsoft.Maps.Events.addHandler(map, 'click', function (e) { handleArgs(e.getX(), e.getY(), e); });
+
+                                    // Setting up the printout panel
+
+                                    loc = {'latitude': -23.539203,'longitude':-46.662009};
+                                    var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                                        map.entities.push(pushpin);
+                                    loc = {'latitude': -8.400845,'longitude':-35.859889};
+                                    var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                                        map.entities.push(pushpin);
+                                    loc = {'latitude': -1.618382,'longitude': -48.466779};
+                                    var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                                        map.entities.push(pushpin);
+                                    loc = {'latitude': -8.068416,'longitude':-34.917036};
+                                    var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                                        map.entities.push(pushpin);
+                                    loc = {'latitude': 16.972327,'longitude':7.981962};
+                                    var pushpin = new Microsoft.Maps.Pushpin(loc, null);
+                                        map.entities.push(pushpin);
+                                        
+                                    var highlights = {};
+                                    window.onload(
+                                    function() {
+                                        // var pushpin = new Microsoft.Maps.Pushpin(-23.539203,-46.662009, null);
+                                        // map.entities.push(pushpin);
+                                        alert("chamou")
+                                    });
+
+                                }
+                            </script>
+                            <br><br>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5 ml-xl-auto">
+                        <div class="special_description_content">
+                            <h2>Relatos</h2>
+                            <p>O mapa mostra os lugares onde existem mais relatos sobre tráfico de pessoas ao redor
+                                do
+                                mundo todo.</p>
+                            <div class="app-download-area">
+                                <div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
+                                    <!-- Relatar um aconteciento Btn -->
+                                    <a href="adicionar">
+                                        <i class="fa fa-plus-circle"></i>
+                                        <p class="mb-0"><span>Relatar um acontecimento</span> Clique aqui</p>
+                                    </a>
+                                </div>
+                                <div class="app-download-btn wow fadeInDown" data-wow-delay="0.4s">
+                                    <!-- Apple Store Btn -->
+                                    <a href="relatos">
+                                        <i class="fa fa-search"></i>
+                                        <p class="mb-0"><span>Pesquisar um aconteciento</span> Clique aqui</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- ***** Relatos Area End ***** -->
+
+<!-- ***** Contato Area Start ***** -->
+<section class="footer-contact-area section_padding_100 clearfix" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Heading Text  -->
+                <div class="section-heading">
+                    <h2>Precisa de ajuda?</h2>
+                    <div class="line-shape"></div>
+                </div>
+                <div class="footer-text">
+                    <p>Entre em contato com a gente, temos profissionais preparados e a disposição para te ajudar e
+                        orientar! <br><br>Ligue em um dos números para falar com um profissional.</p>
+                </div>
+                <div class="address-text">
+                    <p><span>Hashtag:</span> #EndTrafficking</p>
+                </div>
+                <div class="email-text">
+                    <p><span>Email:</span> endtrafficking@gmail.com</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Form Start-->
+                <div class="app-download-area">
+                    <div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
+                        <!-- Relatar um aconteciento Btn -->
+                        <a href="tel:100">
+                            <i class="fa fa-phone"></i>
+                            <p class="mb-0"><span>Ligar para pedir ajuda</span> Número: 100</p>
+                        </a>
+                    </div>
+                    <br>
+                    <div class="app-download-btn wow fadeInDown" data-wow-delay="0.4s">
+                        <!-- Apple Store Btn -->
+                        <a href="tel:180">
+                            <i class="fa fa-phone"></i>
+                            <p class="mb-0"><span>Ligar para pedir ajuda</span> Número: 180</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Form Start-->
+                <div class="app-download-area">
+                    <div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
+                        <!-- Relatar um aconteciento Btn -->
+                        <a href="https://blueinovations.mybluemix.net/" target="_blank">
+                            <i class="ti-comments"></i>
+                            <p class="mb-0"><span>Clique aqui para acessar o nosso</span> Chat Online</p>
+                        </a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Contaato Area End ***** -->
+
+<!-- ***** Footer Area Start ***** -->
+<footer class="footer-social-icon text-center section_padding_70 clearfix">
+    <!-- footer logo -->
+    <div class="footer-text">
+        <h2>T.A.T.</h2>
+    </div>
+    <!-- social icon-->
+    <div class="footer-social-icon">
+        <a href="#"><i class="active fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+    </div>
+    <div class="footer-menu">
+        <nav>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Foooter Text-->
+    <div class="copyright-text">
+        <!-- ***** Removing this text is now allowed! This template is licensed under CC BY 3.0 ***** -->
+        <p>Copyright ©2018 Blue Inovations.</p>
+    </div>
+</footer>
+<!-- ***** Footer Area Start ***** -->
